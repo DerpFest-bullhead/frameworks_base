@@ -685,6 +685,10 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
                 updateTouchHovering();
                 break;
             }
+            case LMOSettings.System.HIGH_TOUCH_POLLING_RATE_ENABLE: {
+                updateTouchPollingRate();
+                break;
+            }
         }
     }
 
@@ -1404,6 +1408,7 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
                     newSettings.getEnabledInputMethodList());
         }
 
+        updateTouchPollingRate();
         updateTouchSensitivity();
         updateTouchHovering();
 
@@ -1469,6 +1474,7 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
                 // Must happen before registerContentObserverLocked
                 mLineageHardware = LineageHardwareManager.getInstance(mContext);
 
+                updateTouchPollingRate();
                 updateTouchSensitivity();
                 updateTouchHovering();
 
@@ -1498,6 +1504,7 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
                                 Settings.Secure.STYLUS_HANDWRITING_ENABLED,
                                 LMOSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE,
                                 LMOSettings.Secure.FEATURE_TOUCH_HOVERING,
+                                LMOSettings.System.HIGH_TOUCH_POLLING_RATE_ENABLE,
                         }, (key, flags, userId) -> {
                             synchronized (ImfLock.class) {
                                 onSecureSettingsChangedLocked(key, userId);
@@ -2983,6 +2990,15 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         userData.mSwitchingController.resetCircularListLocked(mContext, settings);
         userData.mHardwareKeyboardShortcutController.update(settings);
         sendOnNavButtonFlagsChangedLocked(userData);
+    }
+
+    private void updateTouchPollingRate() {
+        if (!mLineageHardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_POLLING_RATE)) {
+            return;
+        }
+        final boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
+                LMOSettings.System.HIGH_TOUCH_POLLING_RATE_ENABLE, 0) == 1;
+        mLineageHardware.set(LineageHardwareManager.FEATURE_HIGH_TOUCH_POLLING_RATE, enabled);
     }
 
     private void updateTouchSensitivity() {
