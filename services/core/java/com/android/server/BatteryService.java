@@ -672,7 +672,7 @@ public final class BatteryService extends SystemService {
                         || mBatteryModProps.modFlag != mLastModFlag
                         || mBatteryModProps.modType != mLastModType
                         || mBatteryModProps.modPowerSource != mLastModPowerSource
-                        || mHealthInfo.chargingState != mLastCharingState
+                        || mHealthInfo.chargingState != mLastChargingState
                         || mHealthInfo.batteryCapacityLevel != mLastBatteryCapacityLevel)) {
 
             if (mPlugType != mLastPlugType) {
