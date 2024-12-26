@@ -2236,12 +2236,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 break;
             case APP_SWITCH:
                 toggleRecentApps();
-                logKeyboardSystemsEvent(event, KeyboardLogEvent.APP_SWITCH);
+                notifyKeyGestureCompleted(event, KeyGestureEvent.KEY_GESTURE_TYPE_APP_SWITCH);
                 break;
             case SEARCH:
                 launchAssistAction(null, event.getDeviceId(), event.getEventTime(),
                        assistInvocationType);
-                logKeyboardSystemsEvent(event, KeyboardLogEvent.LAUNCH_ASSISTANT);
+                notifyKeyGestureCompleted(event, KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_ASSISTANT);
                 break;
             case VOICE_SEARCH:
                 launchVoiceAssistWithWakeLock();
@@ -2389,8 +2389,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         cancelPreloadRecentApps();
                     }
                     mHomePressed = true;
-                    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
-                            "Home - Long Press");
+                    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, "Home - Long Press");
                     // If long press home will launch assistant,
                     // it should pass this right invocation type.
                     performKeyAction(mHomeLongPressAction, event,
@@ -3995,7 +3994,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                             if (mMenuLongPressAction != Action.APP_SWITCH) {
                                 cancelPreloadRecentApps();
                             }
-                            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
                                     "Menu - Long Press");
                             performKeyAction(mMenuLongPressAction, event);
                             mMenuPressed = false;
@@ -4216,7 +4215,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                             if (mAssistLongPressAction != Action.APP_SWITCH) {
                                 cancelPreloadRecentApps();
                             }
-                            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
                                     "Assist - Long Press");
                             performKeyAction(mAssistLongPressAction, event,
                                     AssistUtils.INVOCATION_TYPE_ASSIST_BUTTON);
