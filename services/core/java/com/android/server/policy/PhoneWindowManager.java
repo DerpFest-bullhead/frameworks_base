@@ -1685,7 +1685,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     KEYCODE_BACK, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
                     KeyEvent.FLAG_FROM_SYSTEM, InputDevice.SOURCE_KEYBOARD);
 
-            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
                     "Back - Long Press");
             performKeyAction(mBackLongPressAction, event);
         }
