@@ -21,7 +21,7 @@ android_app {
         "src/**/*.java",
     ],
 
-    libs: ["framework-lmodroid.stubs"],
+    libs: ["framework-lmodroid.impl"],
 
     platform_apis: true,
 
