@@ -377,13 +377,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mStatusBarIconController.addIconGroup(mDarkIconManager);
         mEndSideContent = mStatusBar.findViewById(R.id.status_bar_end_side_content);
         mEndSideAlphaController = new MultiSourceMinAlphaController(mEndSideContent);
-        mPrimaryOngoingActivityChip = mStatusBar.findViewById(R.id.ongoing_activity_chip_primary);
-        mSecondaryOngoingActivityChip =
-                mStatusBar.findViewById(R.id.ongoing_activity_chip_secondary);
-        if (!StatusBarSimpleFragment.isEnabled()) {
-            showEndSideContent(false);
-            showClock(false);
-        }
         mNetworkTrafficHolderStart = mStatusBar.findViewById(R.id.network_traffic_holder_start);
         mNetworkTrafficHolderCenter = mStatusBar.findViewById(R.id.network_traffic_holder_center);
         mNetworkTrafficHolderEnd = mStatusBar.findViewById(R.id.network_traffic_holder_end);
@@ -393,6 +386,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 new MultiSourceMinAlphaController(mNetworkTrafficHolderCenter);
         mNetworkTrafficEndAlphaController =
                 new MultiSourceMinAlphaController(mNetworkTrafficHolderEnd);
+        mPrimaryOngoingActivityChip = mStatusBar.findViewById(R.id.ongoing_activity_chip_primary);
+        mSecondaryOngoingActivityChip =
+                mStatusBar.findViewById(R.id.ongoing_activity_chip_secondary);
+        if (!StatusBarSimpleFragment.isEnabled()) {
+            showEndSideContent(false);
+            showClock(false);
+        }
         initOperatorName();
         initNotificationIconArea();
 
