@@ -254,7 +254,7 @@ constructor(
                                     importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                                 }
 
-                                windowManager.addView(frame, frameLayoutParams)
+                                frame?.let { windowManager.addView(it, frameLayoutParams) }
                                 addViewNowOrLater(this, null)
                                 when (requestReason) {
                                     REASON_AUTH_KEYGUARD ->
@@ -293,7 +293,7 @@ constructor(
                                 importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                             }
 
-                            windowManager.addView(frame, frameLayoutParams)
+                            frame?.let { windowManager.addView(it, frameLayoutParams) }
                             addViewNowOrLater(this, animation)
                             sensorRect = sensorBounds
                         }
